@@ -9,9 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 function addItemInfoDecorator(target, method, descriptor) {
+    let origFunc = descriptor.value;
     descriptor.value = function () {
         const ourDate = new Date().toLocaleString("ru");
         const info = "Celphon " + this.name + " - " + this.price + " $";
+        ;
         return {
             name: this.name,
             price: this.price,
@@ -39,7 +41,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], Item.prototype, "getItemInfo", null);
 let item = new Item('Apple', 100);
-// console.log(item.getItemInfo());
+console.log(item.getItemInfo());
 // Задача 2
 function addDate(type) {
     return function (targetFunction) {

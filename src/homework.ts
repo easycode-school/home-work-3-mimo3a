@@ -2,15 +2,22 @@
 // Задача 1
 
 function addItemInfoDecorator(target: Object, method: string, descriptor: PropertyDescriptor) {
+    let origFunc = descriptor.value;
     descriptor.value = function() {
+        
         const ourDate = new Date().toLocaleString("ru");
-        const info = "Celphon " + this.name +" - " + this.price + " $" ;
-        return {
-            name: this.name, 
-            price: this.price,
-            date: ourDate,
-            info: info
-        }
+        const info = "Cellphone " + this.name +" - " + this.price + " $" ;
+        return 
+        origFunc () {
+            return {
+                name: this.name, 
+                price: this.price,
+                date: this.ourDate,
+                info: this.info
+            };
+             
+        } 
+          
     }
 }
 class Item {
@@ -32,7 +39,7 @@ class Item {
 }
 
 let item = new Item('Apple', 100);
-// console.log(item.getItemInfo());
+console.log(item.getItemInfo());
 
 // Задача 2
 function addDate(type: string) {
@@ -79,13 +86,18 @@ class NewsService2 {
     public getNews() {} // method get all news
     public addToFavorite() {} // method add to favorites
 }
-namespace ApiModels {
+namespace newsUsa {
     export interface INews {
         id: number;
         title: string;
         text: string;
         author: string;
     }
+    export class NewsService {
+        apiurl: string;
+        getNews() {};
+    } 
+    namespace newsUkraine {
     export interface INews2 {
         uuid: string;
         title: string;
@@ -94,15 +106,21 @@ namespace ApiModels {
         date: string;
         imgUrl: string;
     }
-    export class NewsService {
-        apiurl: string;
-        getNews() {};
-    } 
     export class NewsService2 {
         apiurl: string
         getNews() {};
         addToFavorite() {};
     }
+}
+
+
+
+
+
+
+    
+    
+    
 }
 
 // Задача 4
