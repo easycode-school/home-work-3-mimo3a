@@ -4,20 +4,15 @@
 function addItemInfoDecorator(target: Object, method: string, descriptor: PropertyDescriptor) {
     let origFunc = descriptor.value;
     descriptor.value = function() {
-        
+        origFunc.apply(this);
         const ourDate = new Date().toLocaleString("ru");
-        const info = "Cellphone " + this.name +" - " + this.price + " $" ;
-        return 
-        origFunc () {
-            return {
+        const info = "Cellphone " + this.name +" - " + this.price + " $" ;    
+        return {
                 name: this.name, 
                 price: this.price,
-                date: this.ourDate,
-                info: this.info
+                date: ourDate,
+                info: info
             };
-             
-        } 
-          
     }
 }
 class Item {

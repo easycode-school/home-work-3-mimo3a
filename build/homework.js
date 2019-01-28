@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 function addItemInfoDecorator(target, method, descriptor) {
     let origFunc = descriptor.value;
     descriptor.value = function () {
+        origFunc.apply(this);
         const ourDate = new Date().toLocaleString("ru");
-        const info = "Celphon " + this.name + " - " + this.price + " $";
-        ;
+        const info = "Cellphone " + this.name + " - " + this.price + " $";
         return {
             name: this.name,
             price: this.price,
@@ -73,21 +73,24 @@ class NewsService2 {
     getNews() { } // method get all news
     addToFavorite() { } // method add to favorites
 }
-var ApiModels;
-(function (ApiModels) {
+var newsUsa;
+(function (newsUsa) {
     class NewsService {
         getNews() { }
         ;
     }
-    ApiModels.NewsService = NewsService;
-    class NewsService2 {
-        getNews() { }
-        ;
-        addToFavorite() { }
-        ;
-    }
-    ApiModels.NewsService2 = NewsService2;
-})(ApiModels || (ApiModels = {}));
+    newsUsa.NewsService = NewsService;
+    let newsUkraine;
+    (function (newsUkraine) {
+        class NewsService2 {
+            getNews() { }
+            ;
+            addToFavorite() { }
+            ;
+        }
+        newsUkraine.NewsService2 = NewsService2;
+    })(newsUkraine || (newsUkraine = {}));
+})(newsUsa || (newsUsa = {}));
 // Задача 4
 class Junior {
     doTasks() {
